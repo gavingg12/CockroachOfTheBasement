@@ -86,7 +86,6 @@ client.on("message", message => {
     message.channel.send("Commands: \n?idiot: Checks if you are an idiot or not \n?wisdom: Gives you wisdom\n\nthats it")
     */
 
-  }
 });
 
 
