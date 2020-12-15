@@ -1,12 +1,5 @@
 /*
-
-
-
-so what command do we add
-or do we try to optimize
-
-maybe ?roast
-
+TODO:re-add "O cockroach of the basement"
 
 
 
@@ -14,50 +7,75 @@ maybe ?roast
 */
 const Discord = require("discord.js"); // imports the discord library
 const keepAlive = require('./server');
-const wisdom = require('./wisdom');
+const wisdomCM = require('./wisdom');
+const roastCM = require('./roasts')
 const fs = require("fs"); // imports the file io library
 const { stringify } = require("querystring");
 const client = new Discord.Client(); // creates a discord client
 client.once("ready", () => { // prints "Ready!" to the console once the bot is online
-	console.log("Ready!");
-  client.channels.cache.get('787971270448381983').send('RESTARTED, VERSION beta.0.2');
+  console.log("Ready!");
+  client.channels.cache.get('788263463708524554').send('RESTARTED, VERSION beta.0.4');
 });
 
 function randint(min, max) {
-  return Math.floor(Math.random() * (max - min) ) + min;
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
-var idiot = 781122488217501723;
-var neat = 530188818733727774;
+var idiot = "781122488217501723"; //strike 1 role
+var neat = "530188818733727774"; //probably gavin
+var prefix = "?";
 
 client.on("message", message => {
-    if (message.content === "O cockroach of the basement, what is your wisdom?" || message.content === "?wisdom"){
-        message.channel.send(wisdom.showerThought());
-    };
-    if (message.content === "O cockroach of the basement, am i an idiot?" || message.content === '?idiot'){ 
-        if (message.member.roles.cache.get('781122488217501723')){
-            message.channel.send("oh absolutely yes f||lobber||ing idiot")
-        }
-        if (message.sender == neat){
-          message.channel.send("no")
-          }
-        else {
-            var idi = randint(0,100)
-              console.log(idi)
-              if (idi > 50){
-                message.channel.send("no");
-              }
-              if(idi < 50){
-                message.channel.send("yes");
-              } 
-        };
-    };
-    if (message.content === "?help" || message.content === "O cockroach of the basement, what do you do?"){
-      message.channel.send("Commands: \n?idiot: Checks if you are an idiot or not \n?wisdom: Gives you wisdom\n\nthats it")
+  //getting the command and arguments
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  //if it dosent start with prefix, exit
+  const args = message.content.slice(prefix.length).trim().split(' ');
+  // get the arguments of the message
+  const command = args.shift().toLowerCase();
+  // remove the first argument (aka the command)
+  console.log(args) //because yes
+  //the commands
+  if (command == "wisdom") {
+    message.channel.send(wisdomCM.showerThought())
+  }
+  if (command == "idiot") {
+    if (message.member.roles.cache.get('781122488217501723')) { //whoever has strike 1 role will get the reply below
+      message.channel.send("oh absolutely yes f||lobber||ing idiot")
     }
+    if (message.sender == neat) {
+      message.channel.send("no")
+    }
+    else {
+      var idi = randint(0, 100)
+      console.log(idi)
+      if (idi > 50) {
+        message.channel.send("no");
+      }
+      if (idi < 50) {
+        message.channel.send("yes");
+      }
+    };
+  }
+  if (command == "roast") {
+    message.channel.send(roastCM.roastCM()) 
+    //the function name is the word that comes after 'exports.' (as in exports.*roastCM* = roasted)
+    //in the js, and the library name is the variable name of the require()
+    //hope that helps
+  }
+  if (command == "help") {
+    message.channel.send("Prefix: `?`\nCommands: \nidiot: Checks if you are an idiot or not \nwisdom: Gives you wisdom\n\nthats it")
+  }
 });
 
-    
+
+function wisdom(){
+  message.channel.send(wisdomCM.showerThought())
+}
+
+function roasted(){
+  message.channel.send(roastCM.roasted())
+}
+
 //?whatIsYourWisdom
 keepAlive();
 client.login(process.env.TOKEN); // starts the bot up
@@ -67,7 +85,7 @@ find "O cockroach of the basement,"
 check the words after that "What is your wisdom" "What is my IQ" etc
 
 for what is your wisdom
-generate number from 1-(whatever) 
+generate number from 1-(whatever)
 find it in an array 'wisdom[0]'
 then output there
 
