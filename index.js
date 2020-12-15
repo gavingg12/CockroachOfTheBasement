@@ -9,16 +9,22 @@ const Discord = require("discord.js"); // imports the discord library
 const keepAlive = require('./server');
 const wisdomCM = require('./wisdom');
 const roastCM = require('./roasts')
+const TimeUnit = require("timeunit")
+const sleep = require('sleep')
 const fs = require("fs"); // imports the file io library
 const { stringify } = require("querystring");
 const client = new Discord.Client(); // creates a discord client
 client.once("ready", () => { // prints "Ready!" to the console once the bot is online
   console.log("Ready!");
-  client.channels.cache.get('788263463708524554').send('RESTARTED, VERSION beta.0.4');
+  client.channels.cache.get('788263463708524554').send('RESTARTED, VERSION beta.0.5 <@&788322884158095360>');
 });
 
 function randint(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function rickRoll(){
+     message.channel.send("|| *badumbudubudum*\nWe're no strangers to love\nYou know the rules, and so do I\nA full commitment's what I'm thinking of\nYou wouldn't get this from any other guy\nOk you got rickrolled bye ||");
 }
 
 var idiot = "781122488217501723"; //strike 1 role
@@ -26,6 +32,16 @@ var neat = "530188818733727774"; //probably gavin
 var prefix = "?";
 
 client.on("message", message => {
+    if (message.content == 'where banana'){
+        message.channel.send('https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/271157_2200-732x549.jpg')
+    }
+    if (message.content == 'ooga booga'){
+        message.channel.send('https://i.redd.it/oj7w9292r3k21.jpg')
+        sleep.sleep(3)
+        message.channel.send("r!warn <@"+ message.author + ">")
+    }
+
+
   //getting the command and arguments
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   //if it dosent start with prefix, exit
@@ -39,8 +55,9 @@ client.on("message", message => {
     message.channel.send(wisdomCM.showerThought())
   }
   if (command == "idiot") {
-    if (message.member.roles.cache.get('781122488217501723')) { //whoever has strike 1 role will get the reply below
-      message.channel.send("oh absolutely yes f||lobber||ing idiot")
+    if (message.sender == '746363850999332924' || args[0] == '<@!746363850999332924>') { //whoever has strike 1 role will get the reply below
+      message.channel.send("may be an idiot, def not a weeb")
+      return
     }
     if (message.sender == neat) {
       message.channel.send("no")
@@ -54,12 +71,17 @@ client.on("message", message => {
       if (idi < 50) {
         message.channel.send("yes");
       }
+      if (idi < 5) {
+        setTimeout(function(){
+          message.channel.send("||*badumbudubudum*\nWe're no strangers to love\nYou know the rules, and so do I\nA full commitment's what I'm thinking of\nYou wouldn't get this from any other guy\nOk you got rickrolled bye ||")
+        }, 2000) //ok perfect
+             }
     };
   }
   if (command == "roast") {
     message.channel.send(roastCM.roastCM()) 
     //the function name is the word that comes after 'exports.' (as in exports.*roastCM* = roasted)
-    //in the js, and the library name is the variable name of the require()
+    //in the js, and the library name is the variable name of the require() (eg const roastCM = require(./roasts))
     //hope that helps
   }
   if (command == "help") {
@@ -67,14 +89,6 @@ client.on("message", message => {
   }
 });
 
-
-function wisdom(){
-  message.channel.send(wisdomCM.showerThought())
-}
-
-function roasted(){
-  message.channel.send(roastCM.roasted())
-}
 
 //?whatIsYourWisdom
 keepAlive();
