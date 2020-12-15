@@ -7,13 +7,13 @@ TODO:re-add "O cockroach of the basement"
 */
 const Discord = require("discord.js"); // imports the discord library
 const keepAlive = require('./server');
-const wisdom = require('./wisdom');
+const wisdomCM = require('./wisdom');
 const fs = require("fs"); // imports the file io library
 const { stringify } = require("querystring");
 const client = new Discord.Client(); // creates a discord client
 client.once("ready", () => { // prints "Ready!" to the console once the bot is online
   console.log("Ready!");
-  client.channels.cache.get('788263463708524554').send('RESTARTED, VERSION beta.0.3');
+  client.channels.cache.get('788263463708524554').send('RESTARTED, VERSION beta.0.4');
 });
 
 function randint(min, max) {
@@ -21,7 +21,7 @@ function randint(min, max) {
 }
 
 var idiot = 781122488217501723;
-var neat = 530188818733727774;
+var neat = "530188818733727774";
 var prefix = "?"
 
 client.on("message", message => {
@@ -35,7 +35,7 @@ client.on("message", message => {
   console.log(args) //because yes
   //the commands
   if (command == "wisdom") {
-    message.channel.send(wisdom.showerThought())
+    message.channel.send(wisdomCM.showerThought())
   }
   if (command == "idiot") {
     if (message.member.roles.cache.get('781122488217501723')) {
@@ -88,6 +88,10 @@ client.on("message", message => {
 
 });
 
+
+function wisdom(){
+  message.channel.send(wisdomCM.showerThought())
+}
 
 //?whatIsYourWisdom
 keepAlive();

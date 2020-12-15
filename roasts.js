@@ -5,3 +5,4 @@ function roasted(){
   var r = Math.floor(Math.random() * (l - 0) ) + 0;
   return roastList[r];
 };
+exports.roastCM = roasted;
