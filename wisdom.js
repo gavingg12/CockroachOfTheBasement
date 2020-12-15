@@ -33,7 +33,9 @@ var wisdomList =
 "Satan probably wouldnt treat sinners badly.",
 "Dumb people are so arrogant because they never experience the humbling sensation of learning something new and then feel the 'click' in their head when they understand it.",
 "The same things you would die to get are possibly the same things you’d live to keep.",
-"Candle companies make various candles hoping you have money to burn."];
+"Candle companies make various candles hoping you have money to burn.",
+"Everything in the universe is either banana or not banana",
+"claustrophobic people are fine with their brains being trapped in their skull"];
 
 function showerThought(){
   var l = wisdomList.length;
