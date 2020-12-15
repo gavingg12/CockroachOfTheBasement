@@ -8,6 +8,7 @@ TODO:re-add "O cockroach of the basement"
 const Discord = require("discord.js"); // imports the discord library
 const keepAlive = require('./server');
 const wisdomCM = require('./wisdom');
+const roastCM = require('./roasts')
 const fs = require("fs"); // imports the file io library
 const { stringify } = require("querystring");
 const client = new Discord.Client(); // creates a discord client
@@ -20,9 +21,9 @@ function randint(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-var idiot = 781122488217501723;
-var neat = "530188818733727774";
-var prefix = "?"
+var idiot = "781122488217501723"; //strike 1 role
+var neat = "530188818733727774"; //probably gavin
+var prefix = "?";
 
 client.on("message", message => {
   //getting the command and arguments
@@ -38,7 +39,7 @@ client.on("message", message => {
     message.channel.send(wisdomCM.showerThought())
   }
   if (command == "idiot") {
-    if (message.member.roles.cache.get('781122488217501723')) {
+    if (message.member.roles.cache.get('781122488217501723')) { //whoever has strike 1 role will get the reply below
       message.channel.send("oh absolutely yes f||lobber||ing idiot")
     }
     if (message.sender == neat) {
@@ -54,43 +55,25 @@ client.on("message", message => {
         message.channel.send("yes");
       }
     };
+  }
+  if (command == "roast") {
+    message.channel.send(roastCM.roastCM()) 
+    //the function name is the word that comes after 'exports.' (as in exports.*roastCM* = roasted)
+    //in the js, and the library name is the variable name of the require()
+    //hope that helps
   }
   if (command == "help") {
-    message.channel.send("Commands: \n?idiot: Checks if you are an idiot or not \n?wisdom: Gives you wisdom\n\nthats it")
+    message.channel.send("Prefix: `?`\nCommands: \nidiot: Checks if you are an idiot or not \nwisdom: Gives you wisdom\n\nthats it")
   }
-
-  /*
-  old code:
-  if (message.content === "O cockroach of the basement, what is your wisdom?" || message.content === "?wisdom") {
-    message.channel.send(wisdom.showerThought());
-  };
-  if (message.content === "O cockroach of the basement, am i an idiot?" || message.content === '?idiot') {
-    if (message.member.roles.cache.get('781122488217501723')) {
-      message.channel.send("oh absolutely yes f||lobber||ing idiot")
-    }
-    if (message.sender == neat) {
-      message.channel.send("no")
-    }
-    else {
-      var idi = randint(0, 100)
-      console.log(idi)
-      if (idi > 50) {
-        message.channel.send("no");
-      }
-      if (idi < 50) {
-        message.channel.send("yes");
-      }
-    };
-  };
-  if (message.content === "?help" || message.content === "O cockroach of the basement, what do you do?") {
-    message.channel.send("Commands: \n?idiot: Checks if you are an idiot or not \n?wisdom: Gives you wisdom\n\nthats it")
-    */
-
 });
 
 
 function wisdom(){
   message.channel.send(wisdomCM.showerThought())
+}
+
+function roasted(){
+  message.channel.send(roastCM.roasted())
 }
 
 //?whatIsYourWisdom

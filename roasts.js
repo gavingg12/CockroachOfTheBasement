@@ -1,4 +1,4 @@
-roastList = ["Im pretty sure"]
+roastList = ["https://i.redd.it/5nzifzgxt9261.jpg"]
 
 function roasted(){
   var l = roastList.length;
