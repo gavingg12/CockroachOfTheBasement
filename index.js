@@ -16,7 +16,7 @@ const { stringify } = require("querystring");
 const client = new Discord.Client(); // creates a discord client
 client.once("ready", () => { // prints "Ready!" to the console once the bot is online
   console.log("Ready!");
-  client.channels.cache.get('788263463708524554').send('RESTARTED, VERSION beta.0.5 <@&788322884158095360>');
+  client.channels.cache.get('788263463708524554').send('RESTARTED, VERSION beta.0.7 <@&788322884158095360>');
 });
 
 function randint(min, max) {
@@ -45,17 +45,19 @@ client.on("message", message => {
   //getting the command and arguments
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   //if it dosent start with prefix, exit
-  const args = message.content.slice(prefix.length).trim().split(' ');
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
   // get the arguments of the message
   const command = args.shift().toLowerCase();
   // remove the first argument (aka the command)
-  console.log(args) //because yes
+  console.log(message.author + " " + command + args) //because yes
+  
+  
   //the commands
   if (command == "wisdom") {
     message.channel.send(wisdomCM.showerThought())
   }
   if (command == "idiot") {
-    if (message.sender == '746363850999332924' || args[0] == '<@!746363850999332924>') { //whoever has strike 1 role will get the reply below
+    if (message.author == 746363850999332924 || args[0] == '<@!746363850999332924>') { //whoever has strike 1 role will get the reply below
       message.channel.send("may be an idiot, def not a weeb")
       return
     }
@@ -86,6 +88,23 @@ client.on("message", message => {
   }
   if (command == "help") {
     message.channel.send("Prefix: `?`\nCommands: \nidiot: Checks if you are an idiot or not \nwisdom: Gives you wisdom\n\nthats it")
+  }
+  if (command == "iq") {
+     var iq = randint(0, 200);
+     var iqstr = '' + iq
+     if (!message.mentions.members.first()){
+      message.channel.send("<@" + message.author + ">'s iq is " + iqstr)
+     } else if(message.mentions.members.first()) {
+         message.channel.send("<@" + message.mentions.members.first() + ">'s iq is " + iqstr)
+     }// else if (args){
+    //     message.channel.send(args[0] + "'s iq is " + iqstr)
+    // } ADD LATER
+      if (iq == 69) {
+          message.channel.send("nice")
+      }
+  }
+  if (command == "ping") {
+      message.channel.send(`🏓Latency is ${Date.now() - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms\nOh, and pong`);
   }
 });
 
