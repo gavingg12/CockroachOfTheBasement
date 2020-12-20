@@ -92,7 +92,8 @@ var wisdomList =
 "Whenever you dig up dirt or a rock, that could be the first time it has seen the sun in millions of years.||Unless you dig it out at night||",
 "The Hobbit was a book about the dangers of greed. The Hobbit films were ruined because of greed.",
 "Being first in a youtube video is hard, but being last is harder",
-"You don't actually know your birthday, you're just relying on your parents word"];
+"You don't actually know your birthday, you're just relying on your parents word",
+"Dry humor implies there is moist humor."];
 
 function showerThought(){
     var l = wisdomList.length;

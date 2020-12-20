@@ -20,7 +20,7 @@ const { stringify } = require("querystring");
 const client = new Discord.Client(); // creates a discord client
 client.once("ready", () => { // prints "Ready!" to the console once the bot is online
   console.log("Ready!");
-  client.channels.cache.get('788263463708524554').send('RESTARTED, VERSION beta.0.13.2 <@&788322884158095360>');
+  client.channels.cache.get('788263463708524554').send('RESTARTED, VERSION beta.0.13.4 <@&788322884158095360>');
 });
 
 const db = new Database() //DATABASE FILE, STORE USERDATA HERE
@@ -110,18 +110,19 @@ client.on("message", async message => {
       return message.channel.send(`Random what, ${message.author}?`);
     }
     else if (args[0] == "number") {
-      if (!args[1]) return message.reply("what numbers dummy"); //if no arguements
-      else if (args[1] == "1-10") {
-        var oneToTen = randint(1, 10)
-        message.channel.send("I choose " + oneToTen + " :ok_hand:");
-        return
-      }
-      else if (args[1] == "1-100") {
-        var oneToOnehundred = randint(1, 100)
-        message.channel.send("I choose " + oneToOnehundred + " :ok_hand:");
-        return
-      }
-      else if (args[1] == "any") {
+        if (!args[1]) return message.reply("what numbers dummy"); //if no arguements
+
+        range = args[1]
+        
+        if (range[2] == "-"){
+            minMax = range.split("-")
+            min = parseInt(minMax[0])
+            max = parseInt(minMax[1])
+            r = randint(min, max)
+            message.channel.send("I pick " + r + " :ok_hand:")
+        }
+
+        else if (args[1] == "any") {
         if (args[3]) {
           return message.reply("Too many arguements nerd, you only need to do `?random number any (extra)`")
         }
@@ -139,9 +140,6 @@ client.on("message", async message => {
           message.channel.send("I choose " + anyNumberRandom + " :ok_hand:");
         return
       }
-      if (isNaN(args[1])) { 
-        return message.reply("those aren't numbers nerd\n(or maybe they weren't added to the list)"); //put at the bottom so the other lines of code detect first
-      }
     }
     else if (args[0] == "roll-the-die") {
       if (!args[1]) return message.reply("what die dummy");
@@ -150,31 +148,67 @@ client.on("message", async message => {
       }
       else if (args[1] == "D4") {
         var die4 = randint(1, 4)
-        msg = await message.channel.send(":game_die: Rolling... :game_die:");
+        msg = await message.channel.send(":game_die: Rolling    :game_die:");
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling.   :game_die:")
+        }, 500);
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling..  :game_die:")
+        }, 500);
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling... :game_die:")
+        }, 500);
         setTimeout(function() {
           msg.edit("The game die has been rolled: ||" + die4 + "|| has faced upwards. :0")
-        }, 1000)
+        }, 1000);
         return
       }
       else if (args[1] == "D6") {
         var die6 = randint(1, 6)
-        msg = await message.channel.send(":game_die: Rolling... :game_die:");
+        msg = await message.channel.send(":game_die: Rolling    :game_die:");
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling.   :game_die:")
+        }, 500);
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling..  :game_die:")
+        }, 500);
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling... :game_die:")
+        }, 500);
         setTimeout(function() {
           msg.edit("The game die has been rolled: ||" + die6 + "|| has faced upwards. :0")
-        }, 1000)
+        }, 1000);
         return
       }
       else if (args[1] == "D8") {
         var die8 = randint(1, 8)
-        msg = await message.channel.send(":game_die: Rolling... :game_die:");
+        msg = await message.channel.send(":game_die: Rolling    :game_die:");
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling.   :game_die:")
+        }, 500);
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling..  :game_die:")
+        }, 500);
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling... :game_die:")
+        }, 500);
         setTimeout(function() {
           msg.edit("The game die has been rolled: ||" + die8 + "|| has faced upwards. :0")
-        }, 1000)
+        }, 1000);
         return
       }
       else if (args[1] == "D10") {
         var die10 = randint(1, 10)
-        msg = await message.channel.send(":game_die: Rolling... :game_die:");
+        msg = await message.channel.send(":game_die: Rolling    :game_die:");
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling.   :game_die:")
+        }, 500);
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling..  :game_die:")
+        }, 500);
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling... :game_die:")
+        }, 500);
         setTimeout(function() {
           msg.edit("The game die has been rolled: ||" + die10 + "|| has faced upwards. :0")
         }, 1000)
@@ -182,7 +216,16 @@ client.on("message", async message => {
       }
       else if (args[1] == "D12") {
         var die12 = randint(1, 12)
-        msg = await message.channel.send(":game_die: Rolling... :game_die:");
+        msg = await message.channel.send(":game_die: Rolling    :game_die:")
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling.   :game_die:")
+        }, 500)
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling..  :game_die:")
+        }, 500)
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling... :game_die:")
+        }, 500)
         setTimeout(function() {
           msg.edit("The game die has been rolled: ||" + die12 + "|| has faced upwards. :0")
         }, 1000)
@@ -190,7 +233,16 @@ client.on("message", async message => {
       }
       else if (args[1] == "D20") {
         var die20 = randint(1, 20)
-        msg = await message.channel.send(":game_die: Rolling... :game_die:");
+        msg = await message.channel.send(":game_die: Rolling    :game_die:")
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling.   :game_die:")
+        }, 500)
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling..  :game_die:")
+        }, 500)
+        setTimeout(function() {
+          msg.edit(":game_die: Rolling... :game_die:")
+        }, 500)
         setTimeout(function() {
           msg.edit("The game die has been rolled: ||" + die20 + "|| has faced upwards. :0")
         }, 1000)
@@ -204,9 +256,9 @@ client.on("message", async message => {
       if (args[1]) {
         return message.reply("Too many arguements nerd, you only need to do `?random letter`");
       }
-      const array =["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-      const Random = Math.floor(Math.random() * array.length)
-      return message.channel.send("I have chosen the letter `" + array[Random] + "`.");
+      const letters = "abcdefghijklmnopqrstuvwxyz"
+      const Random = Math.floor(Math.random() * letters.length)
+      return message.channel.send("I have chosen the letter `" + letters[Random] + "`.");
     }
   }
   if (command == "wisdom") {
@@ -313,4 +365,4 @@ then output there
 
 
 
-*/
+*/  
