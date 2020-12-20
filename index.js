@@ -114,11 +114,13 @@ client.on("message", async message => {
 
         range = args[1]
         
-        if (range[2] == "-"){
+        if (range.indexOf("-")){
             minMax = range.split("-")
             min = parseInt(minMax[0])
             max = parseInt(minMax[1])
+            console.log(min + "-" + max)
             r = randint(min, max)
+            console.log(r)
             message.channel.send("I pick " + r + " :ok_hand:")
         }
 
